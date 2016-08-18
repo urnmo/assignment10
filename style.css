@@ -1,0 +1,40 @@
+
+body{
+    margin: 3%;
+
+}
+
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4em;
+
+
+}
+
+input{
+    width: 75%;
+    height: 100%;
+    display: block;
+
+}
+
+
+
+
+button{
+    color: grey;
+    font-size: 2em;
+    display: block;
+
+}
+
+
+.alex{
+display: inline-block;
+width: 300px;
+}
+
+.hidden{
+    display: none;
+}
