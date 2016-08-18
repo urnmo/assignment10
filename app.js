@@ -4,6 +4,53 @@
 //write a function to do so
 let finalAnswer = null;
 
+
+function guessBtn() {
+
+    let answerBox = document.querySelector('.userAnswer');
+
+    if (answerBox.value === finalAnswer) {
+        console.log('correct');
+        // Create DOM elements and append them.
+        let parent = document.querySelector('div');
+        let correct = document.createElement('h2');
+        correct.textContent = "CORRECT!"
+        correct.classList.add('reveal1');
+        parent.appendChild(correct);
+        let theTell = document.createElement('p');
+        theTell.classList.add('reveal3');
+        theTell.textContent = finalAnswer;
+        let alex = document.querySelector('#happyAlex')
+        alex.classList.remove('hidden');
+        window.setTimeout(function () {
+            reset();
+            getQuestions();
+        }, 2000);
+        //adopt child
+        parent.appendChild(theTell);
+
+    } else {
+        console.log('wrrrrrooooooooong!');
+        let parent = document.querySelector('div');
+        let wrong = document.createElement('h2');
+        wrong.textContent = "WROOOOOOOONG!";
+        wrong.classList.add('reveal');
+        parent.appendChild(wrong);
+        document.createElement('p');
+        let theTell = document.createElement('p');
+        theTell.classList.add('reveal2');
+        theTell.textContent = finalAnswer;
+        parent.appendChild(theTell);
+        let alex = document.querySelector('#sadAlex');
+
+        alex.classList.remove('hidden');
+        window.setTimeout(function () {
+            reset();
+            getQuestions();
+        }, 2000);
+    }
+}
+
 function getQuestions() {
     console.log('adding a question');
 
@@ -30,68 +77,23 @@ function getQuestions() {
         theAsk.textContent = questionField;
         let parent = document.querySelector('div');
 
-
-
     });
     request.send();
 
 }
+
 window.addEventListener('load', function () {
     getQuestions();
     let guessButton = document.querySelector('.guess');
-    guessButton.addEventListener('click', function () {
+    guessButton.addEventListener('click', guessBtn)
 
-        let answerBox = document.querySelector('.userAnswer');
-
-        if (answerBox.value === finalAnswer) {
-            console.log('correct');
-            // Create DOM elements and append them.
-            let parent = document.querySelector('div');
-            let correct = document.createElement('h2');
-            correct.textContent = "CORRECT!"
-            correct.classList.add('reveal1');
-            parent.appendChild(correct);
-            let theTell = document.createElement('p');
-            theTell.classList.add('reveal3');
-            theTell.textContent = finalAnswer;
-            let alex = document.querySelector('#happyAlex')
-            alex.classList.remove('hidden');
-            window.setTimeout(function () {
-                reset();
-                getQuestions();
-            }, 2000);
-
-
-
-            //adopt child
-            parent.appendChild(theTell);
-
-        } else {
-            console.log('wrrrrrooooooooong!');
-            let parent = document.querySelector('div');
-            let wrong = document.createElement('h2');
-            wrong.textContent = "WROOOOOOOONG!";
-            wrong.classList.add('reveal');
-            parent.appendChild(wrong);
-            document.createElement('p');
-            let theTell = document.createElement('p');
-            theTell.classList.add('reveal2');
-            theTell.textContent = finalAnswer;
-            parent.appendChild(theTell);
-            let alex = document.querySelector('#sadAlex');
-
-            alex.classList.remove('hidden');
-            window.setTimeout(function () {
-                reset();
-                getQuestions();
-            }, 2000);
+    let rtnbtn = document.querySelector('.userAnswer');
+    rtnbtn.addEventListener("keydown", function () {
+        if (event.key === "Enter") {
+            guessBtn();
         }
-
-
-    });
-
-
-});
+    })
+})
 
 
 function reset() {
@@ -103,16 +105,21 @@ function reset() {
     document.querySelector('.question').textContent = "";
     document.querySelector('#sadAlex').classList.add('hidden');
     document.querySelector('#happyAlex').classList.add('hidden');
-if (document.querySelector ('reveal1') !== null){
-    document.querySelector('.reveal1').textContent = "";};
-if (document.querySelector ('reveal3') !== null){
-    document.querySelector('.reveal3').textContent = "";}
-if (document.querySelector ('reveal') !== null){
-    document.querySelector('.reveal').textContent = "";}
-if (document.querySelector ('reveal2') !== null){
-    document.querySelector('.reveal2').textContent = "";}
-if (document.querySelector ('.userAnswer') !== null){ 
-    document.querySelector('.userAnswer').textContent = "";}
+    if (document.querySelector('.reveal1') !== null) {
+        document.querySelector('.reveal1').textContent = "";
+    };
+    if (document.querySelector('.reveal3') !== null) {
+        document.querySelector('.reveal3').textContent = "";
+    };
+    if (document.querySelector('.reveal') !== null) {
+        document.querySelector('.reveal').textContent = "";
+    };
+    if (document.querySelector('.reveal2') !== null) {
+        document.querySelector('.reveal2').textContent = "";
+    };
+    if (document.querySelector('.userAnswer') !== null) {
+        document.querySelector('.userAnswer').value = "";
+    }
 }
 
 
